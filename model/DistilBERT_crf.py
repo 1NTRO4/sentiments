@@ -8,6 +8,7 @@ import torch.nn.functional as F
 from torch.nn import CrossEntropyLoss
 log_soft = F.log_softmax
 
+# DistilBERT-CRF/BERT model
 class DistilBertCrfForNer(DistilBertPreTrainedModel):
     def __init__(self, config):
         super(DistilBertCrfForNer, self).__init__(config)
