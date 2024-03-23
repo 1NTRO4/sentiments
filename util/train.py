@@ -5,10 +5,10 @@ import numpy as np
 from tqdm import tqdm
 import datetime
 import config
-from model.bert_crf import BertCrfForNer as BertNER
+from model.DistilBERT_crf import DistilBertCrfForNer as BertNER
 from torch.utils.data import DataLoader, random_split
-from transformers import BertTokenizer
-from model.bert_crf import BertCrfForNer
+from transformers import AutoTokenizer
+from model.DistilBERT_crf import DistilBertCrfForNer
 from transformers import get_linear_schedule_with_warmup
 from torch import cuda
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
@@ -21,14 +21,15 @@ from seqeval.metrics import classification_report
 from util.process import ids_to_labels,Metrics,Metrics_e,SpanEntityScore
 from seqeval.scheme import BILOU
 from util.adversairal import FGM 
-from transformers import BertTokenizerFast
+from transformers import AutoTokenizerFast
 from sequence_aligner.dataset import PredictDatasetCRF,PredictDatasetBySeq
 from sequence_aligner.containers import TraingingBatch,PredictBatch
-from transformers import BertTokenizerFast
+from transformers import AutoTokenizerFast
 from sequence_aligner.labelset import LabelSet
 from torch.utils.data import DataLoader
 
 def train_epoch(e,model, data_loader,optimizer,scheduler,device):
+
     model.train()
     fgm = FGM(model)
     losses = 0.0
